@@ -1,0 +1,109 @@
+html {
+  box-sizing: border-box;
+  background-color: #eee;
+  color: #222;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+}
+
+.turn-indicator {
+  line-height: 30px;
+}
+
+.board {
+  margin: auto;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #222;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.board.game-over .square:hover,
+.square.player0:hover,
+.square.player1:hover {
+  background-color: inherit;
+  cursor: default;
+}
+
+.player1 {
+  filter: hue-rotate(180deg);
+}
+
+.square:nth-of-type(1),
+.square:nth-of-type(2),
+.square:nth-of-type(3) {
+  border-top: none;
+}
+
+.square:nth-of-type(1),
+.square:nth-of-type(4),
+.square:nth-of-type(7) {
+  border-left: none;
+}
+
+.square:nth-of-type(3),
+.square:nth-of-type(6),
+.square:nth-of-type(9) {
+  border-right: none;
+}
+
+.square:nth-of-type(7),
+.square:nth-of-type(8),
+.square:nth-of-type(9) {
+  border-bottom: none;
+}
+
+.new-game {
+  margin-top: 40px;
+  visibility: hidden;
+}
+
+.new-game.show {
+  visibility: visible;
+}
+
+button {
+  border: none;
+  padding: 11px 18px;
+  background: #008888;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px #00000010, 0 3px 6px #00000050;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+button:hover {
+  background: #009999;
+  box-shadow: 0 10px 20px #00000020, 0 6px 6px #00000050;
+}
