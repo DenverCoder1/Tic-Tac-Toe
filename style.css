@@ -87,14 +87,6 @@ body {
   border-bottom: none;
 }
 
-.new-game {
-  visibility: hidden;
-}
-
-.new-game.show {
-  visibility: visible;
-}
-
 button {
   border: none;
   padding: 12px 18px;
@@ -106,7 +98,13 @@ button {
   cursor: pointer;
   font-size: 14px;
   font-family: inherit;
+  visibility: hidden;
 }
+
+.new-game.show button {
+  visibility: visible;
+}
+
 
 button:hover {
   background: #009999;
