@@ -1,14 +1,18 @@
 html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background-color: #eee;
-  color: #222;
-  text-align: center;
+  color: #222222;
   font-family: "Roboto", sans-serif;
+  background-color: #eee;
+  text-align: center;
 }
 
 *,
 *:before,
 *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
 
@@ -16,16 +20,15 @@ body {
   display: grid;
   align-items: center;
   justify-content: center;
-  min-height: 85vh;
+  min-height: 90vh;
 }
 
 .turn-indicator {
-  line-height: 30px;
+  line-height: 38px;
 }
 
 .board {
-  margin: auto;
-  margin-top: 30px;
+  margin: 30px auto 36px auto;
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
@@ -34,11 +37,14 @@ body {
 .square {
   width: 100px;
   height: 100px;
-  border: 1px solid #222;
+  border: 2px solid #222;
   font-size: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.2s ease-out background-color;
+  color: #880000;
+  cursor: default;
 }
 
 .square:hover {
@@ -82,7 +88,6 @@ body {
 }
 
 .new-game {
-  margin-top: 40px;
   visibility: hidden;
 }
 
@@ -92,7 +97,7 @@ body {
 
 button {
   border: none;
-  padding: 11px 18px;
+  padding: 12px 18px;
   background: #008888;
   color: #fff;
   border-radius: 4px;

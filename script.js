@@ -2,7 +2,7 @@ var TicTacToe = {
 
     init: function () {
         TicTacToe.symbols = ["❌", "⭕"];
-        TicTacToe.WINNING_SETS = [
+        TicTacToe.winningSets = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],
             [0, 3, 6], [1, 4, 7], [2, 5, 8],
             [0, 4, 8], [2, 4, 6]
@@ -11,8 +11,8 @@ var TicTacToe = {
         TicTacToe.board = document.querySelector(".board");
         TicTacToe.turnIndicator = document.querySelector(".turn-indicator");
         TicTacToe.newGameButton = document.querySelector(".new-game");
-        TicTacToe.newGame();
         TicTacToe.addEventListeners();
+        TicTacToe.newGame();
     },
 
     newGame: function () {
@@ -59,7 +59,7 @@ var TicTacToe = {
                 this.endGame(winningText);
             }
             // check if draw
-            else if (this.draw()) {
+            else if (this.checkDraw()) {
                 var winningText = "It's a draw!";
                 this.endGame(winningText);
             }
@@ -77,14 +77,14 @@ var TicTacToe = {
 
     checkWin: function () {
         var ttt = this;
-        return TicTacToe.WINNING_SETS.some(function (x) {
+        return TicTacToe.winningSets.some(function (x) {
             return x.every(function (i) {
                 return ttt.squares[i].innerText == ttt.symbols[ttt.currentPlayer];
             });
         })
     },
 
-    draw: function () {
+    checkDraw: function () {
         return this.squares.every(function (x) {
             return x.innerText.length > 0;
         })
@@ -100,4 +100,4 @@ var TicTacToe = {
     }
 }
 
-window.onload = TicTacToe.init();
+window.onload = TicTacToe.init;
