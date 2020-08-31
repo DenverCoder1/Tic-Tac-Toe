@@ -4,7 +4,7 @@ html {
   -moz-box-sizing: border-box;
   background-color: #eee;
   color: #1a1a1a;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 *,
@@ -168,7 +168,7 @@ body {
 
 button {
   background-color: #008888;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   color: white;
   border: none;
