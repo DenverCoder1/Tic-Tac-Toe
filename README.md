@@ -3,6 +3,6 @@
  
  [Play demo][game]
 
-[<img src="https://i.imgur.com/MU0bald.png"/>][game]
+[<img src="https://i.imgur.com/dJZLQoZ.png"/>][game]
 
 [game]: https://eyl327.github.io/Tic-Tac-Toe/index.html
