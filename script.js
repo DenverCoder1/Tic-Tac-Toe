@@ -1,103 +1,123 @@
+/* Tic-Tac-Toe functions */
 var TicTacToe = {
-
-    init: function () {
-        TicTacToe.symbols = ["❌", "⭕"];
-        TicTacToe.winningSets = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8],
-            [0, 3, 6], [1, 4, 7], [2, 5, 8],
-            [0, 4, 8], [2, 4, 6]
-        ]
+    /* initialize the Tic-Tac-Toe variables */
+    init: function() {
+        TicTacToe.symbols = ["X", "O"];
         TicTacToe.squares = Array.from(document.querySelectorAll(".square"));
+        TicTacToe.turnIndicator = document.querySelector(".turnIndicator");
+        TicTacToe.button = document.querySelector(".newGame");
         TicTacToe.board = document.querySelector(".board");
-        TicTacToe.turnIndicator = document.querySelector(".turn-indicator");
-        TicTacToe.newGameButton = document.querySelector(".new-game");
+        // square positions in which you can get 3-in-a-row
+        TicTacToe.winningSets = [
+            // horizontal sets
+            [0,1,2], [3,4,5], [6,7,8],
+            // vertical sets
+            [0,3,6], [1,4,7], [2,5,8],
+            // diagonal sets
+            [0,4,8], [2,4,6]
+        ];
+        // add click event listeners to squares and button
         TicTacToe.addEventListeners();
+        // reset the game
         TicTacToe.newGame();
     },
 
-    newGame: function () {
-        this.currentPlayer = 0;
-        this.squares.forEach(function (x) {
-            x.innerText = "";
-            x.classList.remove("player0");
-            x.classList.remove("player1");
-        })
-        this.setTurnIndicator();
-        this.board.classList.remove("game-over");
-        this.gameOver = false;
-        this.newGameButton.classList.remove("show");
-    },
-
-    setTurnIndicator: function () {
-        this.turnIndicator.innerText = this.symbols[this.currentPlayer] + "'s turn."
-        this.turnIndicator.classList.remove("player"+(1-this.currentPlayer));
-        this.turnIndicator.classList.add("player"+this.currentPlayer);
-    },
-
-    addEventListeners: function () {
+    // add click event listeners to squares and button
+    addEventListeners: function() {
         var ttt = this;
-        this.squares.forEach(function (x) {
-            x.addEventListener("click", function() {
+        // for each square, add a click listener which will call "play()"
+        this.squares.forEach(function(x) {
+            x.addEventListener("click",function() {
                 ttt.play(this);
-            });
+            }, false)
         })
-        this.newGameButton.firstElementChild.addEventListener("click", function () {
-            if (ttt.gameOver) {
-                ttt.newGame();
-            }
-        })
+        // when the new game button is clicked, call "newGame()"
+        this.button.addEventListener("click", function() {
+            ttt.newGame();
+        }, false);
     },
 
-    play: function (el) {
-        if (!this.gameOver && el.innerText.length == 0) {
-            // set text
-            el.innerText = this.symbols[this.currentPlayer];
-            el.classList.add("player"+this.currentPlayer);
-            // check for win
+    // reset the game
+    newGame: function() {
+        // set player to first player (X)
+        this.activePlayer = 0;
+        // reset the game over variable
+        this.gameOver = false;
+        // remove all X and O classes from every square
+        this.squares.forEach(function (x) {
+            x.classList.remove(TicTacToe.symbols[0]);
+            x.classList.remove(TicTacToe.symbols[1]);
+        })
+        // remove gameOver class from board if it exists
+        this.board.classList.remove("gameOver");
+        // set the turn indicator (X's turn)
+        this.setTurnIndicator();
+    },
+
+    // set the turn indicator to indicate whose turn it is
+    setTurnIndicator: function() {
+        this.turnIndicator.innerText = this.symbols[this.activePlayer] + "'s turn."
+    },
+
+    play: function(el) {
+        // make sure that the square is not filled
+        if (!this.gameOver && el.classList.length == 1) {
+            // set the contents to your player's symbol
+            el.classList.add(this.symbols[this.activePlayer]);
+            // check if you won
             if (this.checkWin()) {
-                var winningText = this.symbols[this.currentPlayer] + " wins!";
-                this.endGame(winningText);
+                // set the game text to display the winner
+                this.turnIndicator.innerText = this.symbols[this.activePlayer] + " wins!";
+                // call the game over function
+                this.endGame();
             }
-            // check if draw
+            // check if there is a draw
             else if (this.checkDraw()) {
-                var winningText = "It's a draw!";
-                this.endGame(winningText);
+                // set the game text to say it is a draw
+                this.turnIndicator.innerText = "It's a draw!";
+                // call the game over function
+                this.endGame();
             }
-            // next player
+            // go to the next player's turn
             else {
-                this.nextTurn();
+                // change the turn (0 -> 1 or 1 -> 0)
+                this.activePlayer = 1 - this.activePlayer;
+                // set the turn indicator text
+                this.setTurnIndicator();
             }
         }
     },
 
-    nextTurn: function () {
-        this.currentPlayer = 1 - this.currentPlayer;
-        this.setTurnIndicator();
-    },
-
-    checkWin: function () {
+    // check if current player won
+    checkWin: function() {
         var ttt = this;
-        return TicTacToe.winningSets.some(function (x) {
-            return x.every(function (i) {
-                return ttt.squares[i].innerText == ttt.symbols[ttt.currentPlayer];
-            });
+        // if for any of the winning sets,
+        // every square in the set is filled with
+        // the current player's symbol, return true
+        // otherwise, return false
+        return this.winningSets.some(function (x) {
+            return x.every(function(i) {
+                return Array.from(ttt.squares[i].classList).indexOf(ttt.symbols[ttt.activePlayer]) > -1;
+            })
         })
     },
 
-    checkDraw: function () {
+    // check if there is a draw
+    checkDraw: function() {
+        // return true if every square
+        // has more than 1 class (is filled)
+        // otherwise, return false
         return this.squares.every(function (x) {
-            return x.innerText.length > 0;
+            return x.classList.length > 1;
         })
     },
 
-    endGame: function (winningText) {
+    // set the game over variable and board class when the game ends
+    endGame: function() {
         this.gameOver = true;
-        this.turnIndicator.innerText = winningText;
-        this.turnIndicator.classList.remove("player"+(1-this.currentPlayer));
-        this.turnIndicator.classList.add("player"+this.currentPlayer);
-        this.board.classList.add("game-over");
-        this.newGameButton.classList.add("show");
+        this.board.classList.add("gameOver");
     }
 }
 
+// call the init() function of TicTacToe when the page loads
 window.onload = TicTacToe.init;
