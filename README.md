@@ -7,7 +7,7 @@
 
 ## Play the demo
 
-https://eyl327.github.io/Tic-Tac-Toe/
+https://DenverCoder1.github.io/Tic-Tac-Toe/
 
 ## Tutorial
 
@@ -15,9 +15,6 @@ https://youtu.be/TjKLbj9Ssqo
 
 ## Screenshot
 
-<a href="https://eyl327.github.io/Tic-Tac-Toe/index.html">
+<a href="https://DenverCoder1.github.io/Tic-Tac-Toe/index.html">
  <img src="https://i.imgur.com/K5k9ouj.png"/>
 </a>
-
-[game]: https://eyl327.github.io/Tic-Tac-Toe/index.html
-[tutorial]: https://youtu.be/TjKLbj9Ssqo
