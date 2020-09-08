@@ -2,13 +2,13 @@
 var TicTacToe = {
     /* initialize the Tic-Tac-Toe variables */
     init: function() {
-        TicTacToe.symbols = ["X", "O"];
-        TicTacToe.squares = Array.from(document.querySelectorAll(".square"));
-        TicTacToe.turnIndicator = document.querySelector(".turnIndicator");
-        TicTacToe.button = document.querySelector(".newGame");
-        TicTacToe.board = document.querySelector(".board");
+        this.symbols = ["X", "O"];
+        this.squares = Array.from(document.querySelectorAll(".square"));
+        this.turnIndicator = document.querySelector(".turnIndicator");
+        this.button = document.querySelector(".newGame");
+        this.board = document.querySelector(".board");
         // square positions in which you can get 3-in-a-row
-        TicTacToe.winningSets = [
+        this.winningSets = [
             // horizontal sets
             [0,1,2], [3,4,5], [6,7,8],
             // vertical sets
@@ -17,9 +17,9 @@ var TicTacToe = {
             [0,4,8], [2,4,6]
         ];
         // add click event listeners to squares and button
-        TicTacToe.addEventListeners();
+        this.addEventListeners();
         // reset the game
-        TicTacToe.newGame();
+        this.newGame();
     },
 
     // add click event listeners to squares and button
@@ -120,4 +120,4 @@ var TicTacToe = {
 }
 
 // call the init() function of TicTacToe when the page loads
-window.onload = TicTacToe.init;
+TicTacToe.init();
